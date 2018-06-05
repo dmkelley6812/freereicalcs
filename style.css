@@ -1,0 +1,32 @@
+ul {
+	list-style: none;
+	
+}
+
+.input-group {
+	margin-bottom: 3rem;
+}
+
+.btn-warning {
+	background-color: #DDD;
+	border: none;
+	color: #333;
+}
+
+
+.btn-outline-secondary {
+	color: #DDD;
+	border-color: #DDD;
+}
+
+#monthlyPaymentLabel,
+#loanAmountLabel {
+	border: 1px #DDD solid;
+	border-radius: 5px;
+	min-width: 25%;
+
+}
+
+.coverPhoto {
+	max-height: 1vw;
+}
