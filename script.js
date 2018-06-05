@@ -83,7 +83,7 @@ document.getElementById("rent").focus();
 
   addUnit.onclick = function() {
     console.log("Add unit clicked");
-  var newDiv = document.getElementById('newDiv');
+  	var newDiv = document.getElementById('newDiv');
     console.log("New Blank Div created");
 	var newInput = document.createElement('div');
     console.log("newInput created");
