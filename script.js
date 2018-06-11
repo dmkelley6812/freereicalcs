@@ -1,166 +1,139 @@
-document.getElementById("rent").focus();
-//vars
 
-	var addUnit = document.getElementById("addUnit");
-	//var rent = document.getElementsByClassName("rent")[0];
-	var taxes = document.getElementById("taxes");
-	var insurance = document.getElementById("insurance");
-	var utilities = document.getElementById("utilities");
-	var maintenance = document.getElementById("maintenance");
-	var vacancy = document.getElementById("vacancy");
-	var mortgage = mPmt;
-	var cashflowLabel = document.getElementById("cashflowLabel");
-//Stores cashflow dollar amount
-	var cashflow = income-expense;
-//Calculate cashflow button
-	var button = document.getElementById("calculate");
-	var reset = document.getElementById("reset");
-	var income = 0;
-	var expense = taxes + insurance + utilities + vacancy + maintenance + mortgage;
-  	var addUnit = document.getElementById("addUnit");
 
-//Function used to calculate cashflow//
+///////////////////////////////////////////////////////////////////////////////////         Mortgage Calc Declarations
+let purchasePrice;
+let downPayment;
+let apr;
+let term;
+let mortgageAmount;
+let monthlyPayment;
+const submitMortgage = document.querySelector("#submitMortgage");
+const resetMortgage = document.querySelector("#resetMortgage");
+
+////////////////////////////////////////////////////////////////////////////////////             Calculator Declarations
+let rent;
+let income;
+let taxes;
+let insurance;
+let utilities;
+let maintenance;
+let vacancy;
+let management;
+let grossIncome;
+let expenses;
+let cashFlow;
+let cashFlowLabel;
+let totalIncome;
+
+
+///////////////////////////////////////////////////////////////////////////////////                      /Buttons
+const submitCalc = document.querySelector("#submitCalc");
+const resetCalc = document.querySelector("#resetCalc");
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////        addUnit function and delete unit  (JQuery)
+
+
+$(document).ready(function() {
+ //Retrieves contents of div with class "copy-fields" and adds it following the div with class "after-add-more"
 	
-	 	var calculateCashflow = function() {
+ 	$("#addUnit").click(function(){ 		  
+          const html = $(".copy-fields").html();
+		  $(".after-add-more").after(html);		 
+		  //prevents page from reloading after addUnit is clicked
+		  event.preventDefault();
+	  });
+	  
+	 
+//here it will remove the current value of the remove button which has been pressed
+     $("body").on("click",".remove",function(){ 
+		$(this).parents(".control-group").remove();		
+	  });	  
+ });
 
-		
-			rent = document.getElementsByClassName("rent");
-			for(var i=0; i < rent.length; i++){
-				income += parseInt(rent[i].value);
-				}
-				
-				console.log(income);
-			
-	 	
-
-	 //expense = ((parseInt(taxes.value, 10)+parseInt(insurance.value, 10)+parseInt(utilities.value, 10)+parseInt(vacancy.value, 10)+parseInt(maintenance.value, 10))/12);
-	 rent = document.getElementsByClassName("rent");
-	 taxes = parseInt(document.getElementById("taxes").value, 10)/12;
-	 insurance = parseInt(document.getElementById("insurance").value, 10)/12;
-	 utilities = parseInt(document.getElementById("utilities").value, 10)/12;
-	 maintenance = (parseInt(document.getElementById("maintenance").value, 10)/100)*income;
-	 vacancy = (parseInt(document.getElementById("vacancy").value, 10)/100)*income;
-	 mortgage = mPmt;
-	 expense = vacancy+maintenance+utilities+insurance+taxes+mortgage;
-	 cashflow = (income-expense).toFixed(2);
-	cashflowLabel.focus();
-}
-
-//Calculates cashflow using all inputs//
-	button.onclick = function() {
-	calculateCashflow();
-		cashflowLabel.innerHTML = "$" + cashflow;
-	console.log("income is " + income);
-	console.log("expense is " + expense);
-	console.log("utilities are " + utilities)
-	console.log("taxes are " + taxes);
-	console.log("insurance is " + insurance);
-	console.log("maintenance is " + maintenance);
-	console.log("vacancy is " + vacancy);
-	console.log("mortgage is " + mortgage);
-	console.log("cashflow is " + cashflow);
-	cashflowLabel.focus();
-}
-
-	
-
-	reset.onclick = function() {
-		console.log("reset clicked");
-		document.getElementById("taxes").value = "";
-		document.getElementById("insurance").value = "";
-		document.getElementById("utilities").value = "";
-		document.getElementById("maintenance").value = "";
-		document.getElementById("vacancy").value = "";
-		document.getElementsByClassName("rent").value = "";
-		resetLoanAmount();
-
-	}
-
-	
-  
-	var rentForm = document.getElementById("rentForm");
-	
-
-  addUnit.onclick = function() {
-    console.log("Add unit clicked");
-  	var newDiv = document.getElementById('newDiv');
-    console.log("New Blank Div created");
-	var newInput = document.createElement('div');
-    console.log("newInput created");
-  
-	// Get template data
-	newInput.innerHTML = rentForm.innerHTML; 
-  	newDiv.appendChild(newInput);
-    console.log("newDiv innerhtml created");
-    console.log("newDiv appended to newLink");
-    console.log(newDiv.innerHTML);
+ ////////////////////////////////////////////////////////////////////////////////////                   end addUnit function
 
 
  
-  }
-
-
-	
-
-// MORTGAGE CALCULATOR
-
-var term;
-var apr;
-var amt;
-var mPmt;
-var pp;
-var down;
-
+ ////////////////////////////////////////////////////////////////////////////////////                 Mortgage Calculator Function
+monthlyPayment = document.querySelector("#monthlyPayment");
+mortgageAmount = document.querySelector("#mortgageAmount");
 
 window.onload = function()
 {
   
-  document.getElementById("sbt").onclick = getValues;
+  document.querySelector("#submitMortgage").onclick = getValues;
+  document.querySelector("#resetMortgage").onclick = clearValues;
+  document.querySelector("#submitCalculator").onclick = calculateCashFlow;
+  document.querySelector("#resetCalculator").onclick = resetCalculator;
 };
 
 //use toFixed(2) to set the precision of the mPayment. Use it on an int.
 function getValues()
 {
-  pp = document.getElementById("pp").value;
-  	console.log("purchase price: " + pp);
-  down = document.getElementById("down").value/100;
-  	console.log("down payment " + down);
-  term = document.getElementById("trm").value;
-  apr = document.getElementById("apr").value;
-  amt = pp -(pp*down);
-   console.log("amount " + amt);
+  purchasePrice = document.querySelector("#purchasePrice").value;
+  downPayment = document.querySelector("#downPayment").value/100;
+  term = document.querySelector("#term").value;
+  apr = document.querySelector("#apr").value;
+  mortgageAmount = purchasePrice -(purchasePrice*downPayment);
   apr /= 1200;
   term *= 12;
-  mPmt = calculatePayment();
-  document.getElementById("pmt").innerHTML = "$" + mPmt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-  document.getElementById("loan").innerHTML = "$" + amt.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  monthlyPayment = calculatePayment();
+  document.querySelector("#monthlyPayment").innerHTML = "$" + monthlyPayment.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  document.querySelector("#mortgageAmount").innerHTML = "$" + mortgageAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 };
 
 function calculatePayment()
 {
-	var payment = amt*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1);
-	return payment;
+	 monthlyPayment = mortgageAmount*(apr * Math.pow((1 + apr), term))/(Math.pow((1 + apr), term) - 1);
+	return monthlyPayment;
 }
 
-var resetLoanAmount = function() {
-	document.getElementById("pmt").innerHTML = "";
-  document.getElementById("loan").innerHTML = "";
-  rent = document.getElementsByClassName("rent");
-  income = 0;
-			for(var i=0; i < rent.length; i++){
-				income += parseInt(rent[i].value);
-				}
-				console.log(income);
-
+function clearValues() {
+	monthlyPayment = 0;
+	mortgageAmount = 0;
+	document.querySelector("#monthlyPayment").innerHTML = "";
+	document.querySelector("#mortgageAmount").innerHTML = "";
 
 }
 
 
-	document.getElementById("rst").onclick = resetLoanAmount;
-// END MORTGAGE CALCULATOR
+////////////////////////////////////////////////////////////////////////////////////                       END mortgage Calculator
+
+
+
+////////////////////////////////////////////////////////////////////////////////////                       START CashFlow Calculator
+
+function calculateCashFlow()	{
+	income = 0;
+	rent = document.getElementById("rentDiv").querySelectorAll("input.rent");
+		for(var i=0; i < rent.length; i++){
+			income += parseInt(rent[i].value, 10);
+		}
+	taxes = parseInt(document.querySelector("#taxes").value, 10)/12;
+	insurance = parseInt(document.querySelector("#insurance").value, 10)/12;
+	utilities = parseInt(document.querySelector("#utilities").value, 10)/12;
+	vacancy = parseInt((document.querySelector("#vacancy").value/100)*income, 10)
+	maintenance = parseInt((document.querySelector("#maintenance").value/100)*income, 10);
+	management = parseInt((document.querySelector("#management").value/100)*income, 10)
+	expenses = taxes+insurance+utilities+vacancy+maintenance+management+monthlyPayment;
+	cashFlow = income-expenses;
+
+	updateUI();
+
+};
+
+function updateUI()
+{
+	document.querySelector("#cashFlowLabel").innerHTML = "$" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#totalIncome").innerHTML = "$" + income;
+}
 
 
 
 
 
-
+////////////////////////////////////////////////////////////////////////////////////                       END CashFlow Calculator
