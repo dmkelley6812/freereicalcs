@@ -1,6 +1,14 @@
+////////////////////////////////////////////////////////////////////// VUE SCRIPTS ////////////////////////////////////////////////////////
 
 
-///////////////////////////////////////////////////////////////////////////////////         Mortgage Calc Declarations
+
+
+
+
+
+
+
+// ///////////////////////////////////////////////////////////////////////////////////         Mortgage Calc Declarations
 let purchasePrice;
 let downPayment;
 let apr;
@@ -31,28 +39,48 @@ const submitCalc = document.querySelector("#submitCalc");
 const resetCalc = document.querySelector("#resetCalc");
 
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////        addUnit function and delete unit  (JQuery)
-
+let rentAmount = 0;
+	let calcRent = function() {
+	
+	$('.rent').focusout(function(){
+		
+   		rentAmount += parseInt($(this).val(), 10);
+   		console.log(rentAmount);
+		});
+	
+};
 
 $(document).ready(function() {
  //Retrieves contents of div with class "copy-fields" and adds it following the div with class "after-add-more"
-	
- 	$("#addUnit").click(function(){ 		  
-          const html = $(".copy-fields").html();
-		  $(".after-add-more").after(html);		 
+	calcRent();
+
+ 	$("#addUnit").click(function(){ 	
+          let duplicate = $(".copy-fields").html();
+           $(duplicate).removeClass("hide");
+		  $(".list").append(duplicate);
+			$(".list > li").find(".hide").removeClass("hide");
+			calcRent();
 		  //prevents page from reloading after addUnit is clicked
+		  
 		  event.preventDefault();
-	  });
-	  
-	 
-//here it will remove the current value of the remove button which has been pressed
-     $("body").on("click",".remove",function(){ 
+
+	  $("body").on("click",".remove",function(){ 
 		$(this).parents(".control-group").remove();		
-	  });	  
- });
+	  });
+	});
+});	
+
+
+
+
+
+
+
+
+
+//here it will remove the current value of the remove button which has been pressed
+     
 
  ////////////////////////////////////////////////////////////////////////////////////                   end addUnit function
 
@@ -108,11 +136,7 @@ function clearValues() {
 ////////////////////////////////////////////////////////////////////////////////////                       START CashFlow Calculator
 
 function calculateCashFlow()	{
-	income = 0;
-	rent = document.getElementById("rentDiv").querySelectorAll("input.rent");
-		for(var i=0; i < rent.length; i++){
-			income += parseInt(rent[i].value, 10);
-		}
+	income = rentAmount;
 	taxes = parseInt(document.querySelector("#taxes").value, 10)/12;
 	insurance = parseInt(document.querySelector("#insurance").value, 10)/12;
 	utilities = parseInt(document.querySelector("#utilities").value, 10)/12;
