@@ -39,30 +39,24 @@ const submitCalc = document.querySelector("#submitCalc");
 const resetCalc = document.querySelector("#resetCalc");
 
 
-////////////////////////////////////////////////////////////////////////////////////        addUnit function and delete unit  (JQuery)
-let rentAmount = 0;
-	let calcRent = function() {
-	
-	$('.rent').focusout(function(){
-		
-   		rentAmount += parseInt($(this).val(), 10);
-   		console.log(rentAmount);
-		});
-	
-};
 
+
+// Start addUnit function  (JQuery) ///////////////////////////////////////////////////////////////////////////////// 
 $(document).ready(function() {
- //Retrieves contents of div with class "copy-fields" and adds it following the div with class "after-add-more"
-	calcRent();
+ 
+$("#rentDiv").focusout(function(){
+ 	calcRent();
+ 	updateRentUI();
 
+
+ })
+	
  	$("#addUnit").click(function(){ 	
           let duplicate = $(".copy-fields").html();
            $(duplicate).removeClass("hide");
 		  $(".list").append(duplicate);
 			$(".list > li").find(".hide").removeClass("hide");
-			calcRent();
-		  //prevents page from reloading after addUnit is clicked
-		  
+		//prevents page from reloading after addUnit is clicked
 		  event.preventDefault();
 
 	  $("body").on("click",".remove",function(){ 
@@ -71,21 +65,53 @@ $(document).ready(function() {
 	});
 });	
 
+ //////////////////////////////////////////////////////////////////////////////////// end addUnit function ////////////////////////
 
 
+// Start deleteUnit function  (JQuery) ///////////////////////////////////////////////////////////////////////////////// 
 
 
+$('#rentDiv').on('click', '.closeButton', function(){
+	// rentAmount = rentAmount - parseInt($('.closeButton').parents().eq(1).find(".unique").val(), 10);
+	// console.log(rentAmount);
+  $(this).closest('li').remove()
+  calcRent();
+  updateRentUI();
+});
 
-
-
-
-//here it will remove the current value of the remove button which has been pressed
-     
-
- ////////////////////////////////////////////////////////////////////////////////////                   end addUnit function
-
-
+ //////////////////////////////////////////////////////////////////////////////////// end deleteUnit function ////////////////////////
  
+
+ // Start rentAmount function    //////////////////////////////////////////////////////////////////////////////////// 
+
+
+let rentAmount = 0;
+
+
+let calcRent = function() {
+	rentAmount = 0;
+	$("input.unique").map(function() {
+		if ($(this).val() === "") {
+			alert("Please complete all rent fields")
+		} else {
+		rentAmount += parseInt($(this).val(), 10);
+		}
+	});
+ };
+let updateRentUI = function() {
+$("#totalRent").html(rentAmount);
+}
+ ////////////////////////////////////////////////////////////////////////////////////                   end rentAmount function
+
+
+// Start focusout function    //////////////////////////////////////////////////////////////////////////////////// 
+
+
+
+ ////////////////////////////////////////////////////////////////////////////////////                   end focusout function
+
+
+
  ////////////////////////////////////////////////////////////////////////////////////                 Mortgage Calculator Function
 monthlyPayment = document.querySelector("#monthlyPayment");
 mortgageAmount = document.querySelector("#mortgageAmount");
@@ -153,7 +179,7 @@ function calculateCashFlow()	{
 function updateUI()
 {
 	document.querySelector("#cashFlowLabel").innerHTML = "$" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#totalIncome").innerHTML = "$" + income;
+	//document.querySelector("#totalIncome").innerHTML = "$" + income;
 }
 
 

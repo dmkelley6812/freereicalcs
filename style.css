@@ -27,6 +27,12 @@ ul {
 
 }
 
+#totalRentLabel,
+#totalRent {
+	color: #555;
+
+}
+
 .coverPhoto {
 	max-height: 1vw;
 }
