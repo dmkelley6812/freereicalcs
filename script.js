@@ -1,12 +1,3 @@
-////////////////////////////////////////////////////////////////////// VUE SCRIPTS ////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
 
 // ///////////////////////////////////////////////////////////////////////////////////         Mortgage Calc Declarations
 let purchasePrice;
@@ -20,6 +11,7 @@ const resetMortgage = document.querySelector("#resetMortgage");
 
 ////////////////////////////////////////////////////////////////////////////////////             Calculator Declarations
 let rent;
+let rentAmount;
 let income;
 let taxes;
 let insurance;
@@ -32,11 +24,14 @@ let expenses;
 let cashFlow;
 let cashFlowLabel;
 let totalIncome;
+let noi;
+let coc;
+let capRate;
 
 
 ///////////////////////////////////////////////////////////////////////////////////                      /Buttons
-const submitCalc = document.querySelector("#submitCalc");
-const resetCalc = document.querySelector("#resetCalc");
+// const submitCalc = document.querySelector("#submitCalc");
+// const resetCalc = document.querySelector("#resetCalc");
 
 
 
@@ -85,7 +80,7 @@ $('#rentDiv').on('click', '.closeButton', function(){
  // Start rentAmount function    //////////////////////////////////////////////////////////////////////////////////// 
 
 
-let rentAmount = 0;
+
 
 
 let calcRent = function() {
@@ -99,17 +94,9 @@ let calcRent = function() {
 	});
  };
 let updateRentUI = function() {
-$("#totalRent").html(rentAmount);
+$("#totalRent").html("$" + rentAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 }
  ////////////////////////////////////////////////////////////////////////////////////                   end rentAmount function
-
-
-// Start focusout function    //////////////////////////////////////////////////////////////////////////////////// 
-
-
-
- ////////////////////////////////////////////////////////////////////////////////////                   end focusout function
-
 
 
  ////////////////////////////////////////////////////////////////////////////////////                 Mortgage Calculator Function
@@ -125,11 +112,32 @@ window.onload = function()
   document.querySelector("#resetCalculator").onclick = resetCalculator;
 };
 
+
+// function resetCalculator() {
+// 	income = 0;
+// 	taxes = 0;
+// 	taxes.value = 0;
+// 	insurance = 0;
+// 	insurance.value = 0;
+// 	utilities = 0;
+// 	utilities.value = 0;
+// 	vacancy = 0;
+// 	vacancy.value = 0;
+// 	maintenance = 0;
+// 	maintenance.value = 0;
+// 	management = 0;
+// 	management.value = 0;
+// 	expenses = 0;
+// 	cashFlow = 0;
+// 	updateUI();
+// 	updateRentUI();
+// }	
 //use toFixed(2) to set the precision of the mPayment. Use it on an int.
 function getValues()
 {
   purchasePrice = document.querySelector("#purchasePrice").value;
   downPayment = document.querySelector("#downPayment").value/100;
+  downPaymentAmount = downPayment*purchasePrice;
   term = document.querySelector("#term").value;
   apr = document.querySelector("#apr").value;
   mortgageAmount = purchasePrice -(purchasePrice*downPayment);
@@ -171,6 +179,8 @@ function calculateCashFlow()	{
 	management = parseInt((document.querySelector("#management").value/100)*income, 10)
 	expenses = taxes+insurance+utilities+vacancy+maintenance+management+monthlyPayment;
 	cashFlow = income-expenses;
+	
+
 
 	updateUI();
 
@@ -178,8 +188,22 @@ function calculateCashFlow()	{
 
 function updateUI()
 {
-	document.querySelector("#cashFlowLabel").innerHTML = "$" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	//document.querySelector("#totalIncome").innerHTML = "$" + income;
+	noi = rentAmount-vacancy-utilities-insurance-taxes-maintenance-management;
+	coc = ((cashFlow*12)/downPaymentAmount)*100;
+	capRate = ((noi*12)/purchasePrice)*100;
+
+	document.querySelector("#monthly-cashflow").innerHTML = "Monthly Cash Flow: " + " $" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#yearly-cashflow").innerHTML = "Yearly Cash Flow: " + " $" + (cashFlow*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#gross-monthly-income").innerHTML = "Gross Monthly Income: " + " $" + (rentAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#gross-yearly-income").innerHTML = "Gross Yearly Income: " + " $" + (rentAmount*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#net-operating-income").innerHTML = "Net Monthly Operating Income: " + " $" + (noi).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#net-yearly-operating-income").innerHTML = "Net Yearly Operating Income: " + " $" + (noi*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+
+	document.querySelector("#total-monthly-expenses").innerHTML = "Total Monthly Expenses: " + " $" + (expenses).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#total-yearly-expenses").innerHTML = "Total Yearly Expenses: " + " $" + (expenses*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#cash-on-cash").innerHTML = "Cash On Cash: " + (coc).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
+	document.querySelector("#capitalization").innerHTML = "Capitalization Rate: " + (capRate).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
+
 }
 
 

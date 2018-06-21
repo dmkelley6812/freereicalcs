@@ -11,34 +11,8 @@
 
 
 
-<!-- "https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js" -->
-<!-- <script type="text/javascript" src="vue.js">
-  let app = new Vue({
-    el: ".addRent",
-     data: {
-       rentIncome: [
-        {
-          rentValue: ""
-        }
-      ]
-    }
-  })
-
-
-
-
-
-
-
-
-
-</script> -->
-
-
-
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">FreeREIcalcs1.com</a>
+  <a class="navbar-brand" href="#">FreeREIcalcs.com</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -66,20 +40,19 @@
 
 
 <!-- Rent Input -->
-
-   
+  
 
 <form>
     <div class="container pt-5" >
       <div class="row justify-content-center">
         <div class="col-lg-8  col-sm-10 d-flex flex-nowrap flex-column text-center">           
-            <h3>Rent*</h3>                    
+            <h3>Rent</h3>                    
               <p class="text-success mb-5">Monthly</p>  
               <!-- RENT DIV -->
                 <ul class="list" id="rentDiv"> 
 
 
-  <!--    COPY FIELDS     -->
+  <!--    COPY FIELDS: Rent Input field that is dynamically duplicated    -->
                   <div class=" copy-fields after-add-more">  
                     <li class="listItem">    
                       <div  class="  form-group justify-content-center" >
@@ -87,10 +60,7 @@
                           <div class="justify-content-center w-100 input-group control-group" id="rentInput" >
                             <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
-                            </div>
-                            
-                            
-                           
+                            </div>                                                                               
                             <input  type="number" name="rent"  class="form-control rent unique" aria-label="Amount (to the nearest dollar)">
                               <div class="input-group-append">
                                   <span class="input-group-text mr-3">.00</span>
@@ -98,62 +68,29 @@
                                     <span aria-hidden="true">&times;</span>
                                   </button>                            
                               </div>
-                            
                           </div> 
-
-
                         </div>              
                       </div>
                     </li>
                   </div>
-<!-- END COPY FIELDS -->
-
-
                 </ul>
 
-            <!-- <div class="row justify-content-center">
-              <div class="col-xs-6 col-sm-6 col-lg-4 text-center">                      
-                <h6 class=" p-2" id="">Total Income</h6>
-                  <div class="mb-3" id="" style="font-size: 1.5rem;">
-                    <p id ="" class="pb-5">Total Income:</p> 
-                  </div>                    
-              </div>
-            </div> -->
-            
-            
+      
+<!-- END COPY FIELDS -->
+   
 
 
-    <!-- DIV to Copy -->
-  <!--       <div class=" copy-fields hide">
-            <div class="container  p-0">
-            <div class="row ">
-                <div class="col-lg-12">
-                <div class="control-group input-group">
-                        <div class="input-group-prepend">
-                        <span class="input-group-text">$</span>
-                        </div>
-                        
-                        <input v-model="rent" type="number" name="rent" class="form-control rent thisOne" aria-label="Amount (to the nearest dollar)">
-                        <div class="input-group-append">
-                        <span class="input-group-text mr-3">.00</span>                            
-                        </div>
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-outline-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> X</button>
-                              </div>
-                    </div>   
-                </div>  
-            </div> 
-            </div>
-        </div> -->
-
-        
-
+<!-- Add Unit Button -->
         <div class="container justify-content-center">
             <div class="row justify-content-center">
                 <div class-="col-lg-4 col-sm-8 col-xs-10">
                 <button id="addUnit" class="btn btn-outline-success btn-sm">+ Add unit </button>
                 </div>               
             </div>
+
+<!-- END Add Unit Button -->
+
+<!-- Total Rent Div -->
             <div class="mt-5 row justify-content-center">
                 <div class-="col-lg-4 col-sm-8 col-xs-10">
                   <h6 id="totalRentLabel" >Total rent:</h6>
@@ -165,6 +102,12 @@
     </div>
   </div>
 </form>
+<!-- END Total Rent Div -->
+
+
+
+<!-- Mortgage Calculator-->
+
 
 
 <div class="container-fluid mt-5 pt-5 pb-5 pr-0 pl-0 mortgageCalc bg-success">
@@ -245,6 +188,14 @@
             </div>
   </form>
 </div>
+
+
+<!-- END Mortgage Calculator -->
+
+
+
+<!-- Expenses -->
+
 
 <div class="container-fluid justify-content-center text-center ">
   <div class="row justify-content-center">
@@ -344,45 +295,85 @@
             </div>
         </div>
       </li>
-          <!-- <form action="">
-                <label class="control-label" type="text" id="apr" name="APR"></label><input />
-                <label>Loan Term: <input type="text" id="trm" name="APR"/></label>
-                <label>Loan Amount: <input type="text" id="amt" name="amt"/></lablel>
-                <input type="text" id="pmt" name="mPmt"/>
-                <input type="button" id="sbt" value="Submit" />
-                <input type="reset" id="rst" value="Reset Form" />
-              </form> -->
-         
-      </ul>
+    </ul>
+
+  <!-- END Expenses --> 
+
+
+  <!-- Submit and Reset Buttons --> 
+
       <div class="container justify-content-center">
           <input type="button" class="btn btn-primary" id="submitCalculator" value="Submit" />
           <input type="reset" class="btn btn-primary" id="resetCalculator" value="Reset" />
           
       </div>
+
+   <!-- END Submit and Reset Buttons -->   
+    
     </div>
   </div>
 </div>
 
 
-<!--Monthly Cashflow-->
+<!--Results Box-->
 
-<div class="container mt-5 text-center">
-  <div class="row justify-content-center text-center">
-    <div class="justify-content-center">
-      <div class="card text-white bg-dark mb-3 justify-content-center" style="max-width: 20rem;">
-        <div class="card-header">Results</div>
-        <div class="card-body">
-          <h4 class="card-title">Your monthly cash flow is:</h4>
-          <h1 id="cashFlowLabel"></h1>
-        </div>
-      </div>
+<div class="container mt-5 text-center justify-content-center  mb-5">
+  <div class="row justify-content-center">
+    <div class="p-3 resultsBox col-lg-6 col-sm-10 justify-content-center text-center">
+      <h3>Results</h3>
+        <ul class="p-0 results">
+          <li>
+            <!-- <h6 class="blueText">Monthly Cash Flow:</h6> -->
+            <h6 class=" text-success" ><strong id="monthly-cashflow"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Monthly Cash Flow:</h6> -->
+            <h6 class=" text-muted" id="monthly-cashflow-per"></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Yearly Cash Flow:</h6> -->
+            <h6 class="text-success" ><strong id="yearly-cashflow"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Gross Monthly Income:</h6> -->
+            <h6 class="text-info"><strong  id="gross-monthly-income"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Gross Yearly Income:</h6> -->
+            <h6 class="text-info" ><strong id="gross-yearly-income"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Net Operating Income:</h6> -->
+            <h6 class="text-info" ><strong id="net-operating-income"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Net Operating Income:</h6> -->
+            <h6 class="text-info" ><strong id="net-yearly-operating-income"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Total Monthly Expenses:</h6> -->
+            <h6 class="text-danger" ><strong id="total-monthly-expenses"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Total Yearly Expenses:</h6> -->
+            <h6 class="text-danger" ><strong id="total-yearly-expenses"></strong></h6>
+          </li>
+          <li>
+            <!-- <h6 class="blueText">Cash on Cash Return:</h6> -->
+            <h6 class="text-warning" ><strong id="cash-on-cash"></strong></h6>
+          </li>
+          <li>
+           <!--  <h6 class="blueText">Capitalization Rate:</h6> -->
+            <h6 class="text-warning" ><strong id="capitalization"></strong></h6>
+          </li>
+        </ul>
+
     </div>
   </div>
 </div>
-</div>
 
 
-
+<!-- END Results Box --> 
 
 
 

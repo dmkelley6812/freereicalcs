@@ -54,3 +54,22 @@ button.close {
 	padding-right: 0;
 	margin: 0;
 }
+
+.resultsBox {
+	border: 1px solid #3ad894;
+	border-radius: 10px;
+}
+
+.blueText {
+	color: #233177;
+	font-weight: bold;
+}
+
+.greenText {
+	color: #3ad894;
+}
+
+.results li {
+	padding: .2rem;
+	font-weight: bold;
+}

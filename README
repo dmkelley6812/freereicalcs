@@ -1,1 +1,24 @@
 README
+
+
+FreeREIcalcs.com is a website offering free real estate investing calculators. 
+
+
+Free Subscription Features:
+
+- Unlimited use of basic rental property, flip, and wholesale calculators
+- ability to save 1 calculator at a time.
+- ability to share calculator results
+- ability to print/save a very basic result of calculator with freeREIcalcs watermark
+- use zillow API for property valuation
+
+
+Pro Subscription ($9.95/mo.)
+*includes all Free features PLUS...
+
+- Unlimited use off all calculators with advanced features
+- Save an unlimited number of calculator results
+- Create a portfolio of properties tied to calculator results and assess entire portfolio performance
+- print/share advanced reports for individual properties or portfolios
+- add professional logo to reports
+- Calculators have advanced features such as adding private lender calculators into a standard calculator so the expenses are used in the cashflow calculation (ex.: a 24 unit complex is purchases ith 75% bank financing, and the remaining 25% is paid by investor 1 who agreed to 50% of cashflow until investment is paid back and then 20% of cashflow indefinitely.)
