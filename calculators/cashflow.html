@@ -197,9 +197,9 @@
 <!-- Expenses -->
 
 
-<div class="container-fluid justify-content-center text-center ">
-  <div class="row justify-content-center">
-    <div class="col-4 text-center ">
+<div class="container-fluid justify-content-center text-center p-0">
+  <div class="row justify-content-center mb-5 pb-5">
+    <div class="col-lg-5 col-md-8 col-sm-8 col-xs-10 text-center ">
     <div class="d-flex flex-column text-center">
          <h3 class="mb-2 mt-5 pt-5">Expenses</h3>
             <p class="text-success pb-5">Annually</p>
@@ -315,71 +315,71 @@
 </div>
 
 
-<!--Results Box-->
+<div class="container-fluid mt-5 pt-5 p-0 h-75 hide" id="output">
+  <div class="row justify-content-around mb-5 ">
+    
 
-<div class="container mt-5 text-center justify-content-center  mb-5">
-  <div class="row justify-content-center">
-    <div class="p-3 resultsBox col-lg-6 col-sm-10 justify-content-center text-center">
-      <h3>Results</h3>
-        <ul class="p-0 results">
-          <li>
-            <!-- <h6 class="blueText">Monthly Cash Flow:</h6> -->
-            <h6 class=" text-success" ><strong id="monthly-cashflow"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Monthly Cash Flow:</h6> -->
-            <h6 class=" text-muted" id="monthly-cashflow-per"></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Yearly Cash Flow:</h6> -->
-            <h6 class="text-success" ><strong id="yearly-cashflow"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Gross Monthly Income:</h6> -->
-            <h6 class="text-info"><strong  id="gross-monthly-income"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Gross Yearly Income:</h6> -->
-            <h6 class="text-info" ><strong id="gross-yearly-income"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Net Operating Income:</h6> -->
-            <h6 class="text-info" ><strong id="net-operating-income"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Net Operating Income:</h6> -->
-            <h6 class="text-info" ><strong id="net-yearly-operating-income"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Total Monthly Expenses:</h6> -->
-            <h6 class="text-danger" ><strong id="total-monthly-expenses"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Total Yearly Expenses:</h6> -->
-            <h6 class="text-danger" ><strong id="total-yearly-expenses"></strong></h6>
-          </li>
-          <li>
-            <!-- <h6 class="blueText">Cash on Cash Return:</h6> -->
-            <h6 class="text-warning" ><strong id="cash-on-cash"></strong></h6>
-          </li>
-          <li>
-           <!--  <h6 class="blueText">Capitalization Rate:</h6> -->
-            <h6 class="text-warning" ><strong id="capitalization"></strong></h6>
-          </li>
-        </ul>
-
+    <div class="col-lg-3 col-md-5 col-sm-8 col-xs-10 mt-3">
+    <div class="card border-warning mb-3 h-100" >
+      <div class="card-header text-warning">Overview</div>
+        <div class="card-body">
+          <ul class="p-0">
+            <li>
+              <h6 class="text-muted" >Monthly Cash Flow: <strong id="monthly-cashflow" class=" text-warning"></strong> </h6>              
+            </li>
+            <li>
+              <h6 class="text-muted" >Yearly Cash Flow:<strong id="yearly-cashflow" class="text-warning"></strong></h6>
+            </li>
+            <li>
+              <h6 class="text-muted" >Cash on Cash:<strong id="cash-on-cash" class="text-warning"></strong></h6>
+            </li>
+            <li>
+              <h6 class="text-muted" >Capitalization Rate:<strong id="capitalization" class="text-warning"></strong></h6>
+            </li>
+          </ul>
+      </div>
     </div>
-  </div>
+    </div>
+
+    <div class="col-lg-3 col-md-5 col-sm-8 col-xs-10 mt-3">
+      <div class="card border-success mb-3 h-100" >
+        <div class="card-header text-success">Income</div>
+          <div class="card-body">
+           <ul class="p-0">
+            <li>
+              <h6 class="text-muted">Gross Monthly Income: <strong  id="gross-monthly-income" class="text-success"></strong></h6>
+            </li>
+            <li>
+              <h6 class="text-muted" >Gross Yearly Income: <strong id="gross-yearly-income" class="text-success"></strong></h6>
+            </li>
+            <li>
+              <h6 class="text-muted" >Monthly NOI:<strong id="net-operating-income" class="text-success"></strong></h6>
+            </li>
+            <li>
+              <h6 class="text-muted" >Yearly NOI<strong id="net-yearly-operating-income" class="text-success"></strong></h6>
+            </li>
+           </ul>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-5 col-sm-8 col-xs-10 mt-3">
+      <div class="card border-danger mb-3 h-100" >
+          <div class="card-header text-danger">Expenses</div>
+            <div class="card-body">
+              <ul class="p-0">
+                 <li>
+                  <h6 class="text-muted" >Monthly Expenses: <strong id="total-monthly-expenses" class="text-danger"></strong></h6>
+                </li>
+                <li>
+                  <h6 class="text-muted" >Yearly Expenses:<strong id="total-yearly-expenses" class="text-danger"></strong></h6>
+                </li>
+                
+              </ul>
+            </div>
+      </div>
+    </div>
 </div>
-
-
-<!-- END Results Box --> 
-
-
-
-
-
-
 
 
 

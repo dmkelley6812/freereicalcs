@@ -27,7 +27,7 @@ let totalIncome;
 let noi;
 let coc;
 let capRate;
-
+let numberOfUnits;
 
 ///////////////////////////////////////////////////////////////////////////////////                      /Buttons
 // const submitCalc = document.querySelector("#submitCalc");
@@ -50,7 +50,9 @@ $("#rentDiv").focusout(function(){
           let duplicate = $(".copy-fields").html();
            $(duplicate).removeClass("hide");
 		  $(".list").append(duplicate);
+
 			$(".list > li").find(".hide").removeClass("hide");
+			$(".list").focus();
 		//prevents page from reloading after addUnit is clicked
 		  event.preventDefault();
 
@@ -85,14 +87,21 @@ $('#rentDiv').on('click', '.closeButton', function(){
 
 let calcRent = function() {
 	rentAmount = 0;
-	$("input.unique").map(function() {
+	$("input.unique").map(function(index) {
 		if ($(this).val() === "") {
-			alert("Please complete all rent fields")
-		} else {
+			$(this).addClass("is-invalid")
+			$("#addUnit").addClass("disabled");
+			document.querySelector("#addUnit").disabled = true;
+		} else if ($(this).val() != ""){
+			$(this).removeClass("is-invalid");
+			$("#addUnit").removeClass("disabled");
+			document.querySelector("#addUnit").disabled = false;
 		rentAmount += parseInt($(this).val(), 10);
+		numberOfUnits = index+1;
 		}
 	});
  };
+
 let updateRentUI = function() {
 $("#totalRent").html("$" + rentAmount.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 }
@@ -179,10 +188,9 @@ function calculateCashFlow()	{
 	management = parseInt((document.querySelector("#management").value/100)*income, 10)
 	expenses = taxes+insurance+utilities+vacancy+maintenance+management+monthlyPayment;
 	cashFlow = income-expenses;
-	
-
-
 	updateUI();
+	document.querySelector("#output").classList.remove("hide");
+	window.location.hash = '#output';
 
 };
 
@@ -192,17 +200,17 @@ function updateUI()
 	coc = ((cashFlow*12)/downPaymentAmount)*100;
 	capRate = ((noi*12)/purchasePrice)*100;
 
-	document.querySelector("#monthly-cashflow").innerHTML = "Monthly Cash Flow: " + " $" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#yearly-cashflow").innerHTML = "Yearly Cash Flow: " + " $" + (cashFlow*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#gross-monthly-income").innerHTML = "Gross Monthly Income: " + " $" + (rentAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#gross-yearly-income").innerHTML = "Gross Yearly Income: " + " $" + (rentAmount*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#net-operating-income").innerHTML = "Net Monthly Operating Income: " + " $" + (noi).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#net-yearly-operating-income").innerHTML = "Net Yearly Operating Income: " + " $" + (noi*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#monthly-cashflow").innerHTML = "  " + "$" + cashFlow.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#yearly-cashflow").innerHTML = "  " + " $" + (cashFlow*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#gross-monthly-income").innerHTML = "  " + " $" + (rentAmount).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#gross-yearly-income").innerHTML = "  " + " $" + (rentAmount*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#net-operating-income").innerHTML = "  " + " $" + (noi).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#net-yearly-operating-income").innerHTML = "  " + " $" + (noi*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-	document.querySelector("#total-monthly-expenses").innerHTML = "Total Monthly Expenses: " + " $" + (expenses).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#total-yearly-expenses").innerHTML = "Total Yearly Expenses: " + " $" + (expenses*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-	document.querySelector("#cash-on-cash").innerHTML = "Cash On Cash: " + (coc).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
-	document.querySelector("#capitalization").innerHTML = "Capitalization Rate: " + (capRate).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
+	document.querySelector("#total-monthly-expenses").innerHTML = "  " + " $" + (expenses).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#total-yearly-expenses").innerHTML = "  " + " $" + (expenses*12).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+	document.querySelector("#cash-on-cash").innerHTML = "  " + (coc).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
+	document.querySelector("#capitalization").innerHTML = "  " + (capRate).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + " %";
 
 }
 
